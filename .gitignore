@@ -5,4 +5,7 @@ cmake-build-debug/
 bin/
 build/
 out/
+slgj
+_deps/
+CMakeFiles/
 CMakeSettings.json
