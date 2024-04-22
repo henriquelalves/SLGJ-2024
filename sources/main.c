@@ -1,21 +1,17 @@
 #include "raylib.h"
+#include "text.h"
+#include "texture.h"
+
 #include <libguile.h>
 #include <math.h>
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <pthread.h> 
 
-
-static SCM rl_draw_text(SCM text)
-{
-  scm_t_string_failed_conversion_handler handler;
-  char* str = scm_to_stringn(text, NULL, NULL, handler);
-  DrawText(str, 200, 80, 20, RED);
-}
-
 static void* game (void* data)
 {
-  scm_c_define_gsubr ("rl-draw-text", 1, 0, 0, &rl_draw_text);
+  //rl_text_define_methods();
+  rl_texture_define_methods();
   
   const int screen_width = 800;
   const int screen_height = 600;
@@ -32,12 +28,22 @@ static void* game (void* data)
 
   while (!WindowShouldClose())
     {
-      scm_call_0(guile_update);
+      scm_call_with_blocked_asyncs(guile_update);
+      //scm_call_0(guile_update);
       
       BeginDrawing();
       ClearBackground(RAYWHITE);
-      scm_call_0(guile_draw);
+      scm_call_with_blocked_asyncs(guile_draw);
+      //scm_call_0(guile_draw);
       EndDrawing();
+
+      // This doesn't change anything
+      //      SCM_TICK;
+      
+      // This line makes memory manageable - until it crashes again (takes more time to crash though)
+      //      scm_run_finalizers();
+      // This crashes after just a couple of frames
+      //      scm_gc();
     }
   
   CloseWindow();
