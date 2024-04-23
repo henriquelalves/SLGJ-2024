@@ -1,14 +1,16 @@
 #include "raylib.h"
 #include "text.h"
+#include "s7.h"
 
-#include <libguile.h>
 #include <math.h>
 #include <stdio.h> 
-#include <stdlib.h> 
+#include <stdlib.h>
 
-static void* game (void* data)
-{
-  rl_text_define_methods();
+
+int main(int argc, char* argv[]) {
+  s7_scheme *s7 = s7_init();
+  
+  rl_text_define_methods(s7);
   
   const int screen_width = 800;
   const int screen_height = 600;
@@ -17,30 +19,24 @@ static void* game (void* data)
   SetTargetFPS(60);
 
   char filename[] = SCRIPTS_PATH"main.scm";
+  s7_load(s7, filename);
 
-  scm_c_primitive_load(filename);
-
-  SCM guile_draw = scm_variable_ref(scm_c_lookup("draw"));
-
+  s7_pointer s7_update_fn = s7_name_to_value(s7, "update");
+  s7_pointer s7_draw_fn = s7_name_to_value(s7, "draw");
+  
   while (!WindowShouldClose())
-    { 
+    {
+      s7_call(s7, s7_update_fn, s7_list(s7, 0));      
+      
       BeginDrawing();
       ClearBackground(RAYWHITE);
-      DrawText("a", 200, 80, 20, RED); // <- this line works
-      
-      //scm_call_0(guile_draw); // <- this will crash the game
-
+      s7_call(s7, s7_draw_fn, s7_list(s7, 0));
       EndDrawing();
 
+      s7_eval_c_string(s7, "(display 'noice')");
     }
   
   CloseWindow();
   
-  return NULL;
-}
-
-
-int main(int argc, char* argv[]) {
-  scm_with_guile (&game, NULL);
   return 0;
 }
