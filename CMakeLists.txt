@@ -32,6 +32,13 @@ target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_INCLUDE})
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib PkgConfig::GUILE_PKG)
 
+# Checks if OSX and links appropriate frameworks (Only required on MacOS)
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework OpenGL")
+endif()
+
 # Setting ASSETS_PATH
 target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="./assets/")
 target_compile_definitions(${PROJECT_NAME} PUBLIC SCRIPTS_PATH="./scripts/")
