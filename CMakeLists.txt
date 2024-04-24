@@ -37,11 +37,22 @@ if (APPLE)
     target_link_libraries(${PROJECT_NAME} PRIVATE "-framework OpenGL")
 endif()
 
+# Web Configurations
+if (${PLATFORM} STREQUAL "Web")
+  # Tell Emscripten to build an example.html file.
+  set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+endif()
+
+if (EMSCRIPTEN)
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1")
+  set(CMAKE_EXECUTABLE_SUFFIX ".html") # This line is used to set your executable to build with the emscripten html template so that you can directly open it.
+endif ()
+
 # Setting ASSETS_PATH
 target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="./assets/")
 target_compile_definitions(${PROJECT_NAME} PUBLIC SCRIPTS_PATH="./scripts/")
 
-add_custom_command(
-  TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy  $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME} ${CMAKE_SOURCE_DIR}/${CMAKE_PROJECT_NAME}
-)
+# add_custom_command(
+#   TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+#   COMMAND ${CMAKE_COMMAND} -E copy  $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME} ${CMAKE_SOURCE_DIR}/${CMAKE_PROJECT_NAME}
+# )
