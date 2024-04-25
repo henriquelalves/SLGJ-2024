@@ -20,8 +20,8 @@ EM_BOOL main_loop_web(double time, void* userData) {
   s7_call(s7, s7_update_fn, s7_list(s7, 0));
       
   BeginDrawing();
-  ClearBackground(RAYWHITE);
-  s7_call(s7, s7_draw_fn, s7_list(s7, 0));
+  ClearBackground(BLUE);
+  //s7_call(s7, s7_draw_fn, s7_list(s7, 0));
   EndDrawing();
   return EM_TRUE;
 }
@@ -40,7 +40,7 @@ void main_loop(){
 int main(int argc, char* argv[]) {
   s7 = s7_init();
   
-  // rl_text_define_methods(s7);
+  rl_text_define_methods(s7);
   
   const int screen_width = 800;
   const int screen_height = 600;
