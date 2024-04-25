@@ -1,17 +1,14 @@
 (define a 0)
-(define b 0)
+(define b (rl-load-texture))
 
-(define update
-  (lambda ()
-    (set! a (+ a 1))
-    (set! b (rl-load-texture))
-    ;;(display b)
-    ;;(gc)
-    ))
+(define (update)
+  (cond ((rl-is-key-down 262) (set! b (rl-load-texture))) ;; right
+	((rl-is-key-down 263) (set! a (+ a 1))) ;; left
+	((rl-is-key-down 264) (gc)) ;; down
+	)
+  )
 
-(define draw
-  (lambda ()
-    (rl-draw-text (number->string a))
-    (display "ue")
-    (rl-draw-texture b)
-    ))
+(define (draw)
+  (rl-draw-text (number->string a))
+;    (rl-draw-texture b)
+  )

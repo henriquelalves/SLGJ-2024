@@ -4,8 +4,10 @@
 #endif
 
 #include "raylib.h"
-#include "text.h"
 #include "s7.h"
+#include "text.h"
+#include "texture.h"
+#include "core.h"
 
 #include <math.h>
 #include <stdio.h> 
@@ -41,6 +43,8 @@ int main(int argc, char* argv[]) {
   s7 = s7_init();
   
   rl_text_define_methods(s7);
+  rl_texture_define_methods(s7);
+  rl_core_define_methods(s7);
   
   const int screen_width = 800;
   const int screen_height = 600;
@@ -48,7 +52,6 @@ int main(int argc, char* argv[]) {
   InitWindow(screen_width, screen_height, "SLGJ - 2024");
   SetTargetFPS(60);
 
-  printf("foi");
   char filename[] = SCRIPTS_PATH"main.scm";
 
   s7_load(s7, filename);
