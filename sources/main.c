@@ -21,7 +21,7 @@ EM_BOOL main_loop_web(double time, void* userData) {
       
   BeginDrawing();
   ClearBackground(BLUE);
-  //s7_call(s7, s7_draw_fn, s7_list(s7, 0));
+  s7_call(s7, s7_draw_fn, s7_list(s7, 0));
   EndDrawing();
   return EM_TRUE;
 }
@@ -49,6 +49,7 @@ int main(int argc, char* argv[]) {
   SetTargetFPS(60);
 
   char filename[] = SCRIPTS_PATH"main.scm";
+
   s7_load(s7, filename);
 
   s7_update_fn = s7_name_to_value(s7, "update");
