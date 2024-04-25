@@ -46,6 +46,26 @@ endif()
 if (EMSCRIPTEN)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s GL_ENABLE_GET_PROC_ADDRESS=1 --embed-file assets --embed-file scripts")
   set(CMAKE_EXECUTABLE_SUFFIX ".html") # This line is used to set your executable to build with the emscripten html template so that you can directly open it.
+  add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/assets
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/scripts $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/scripts
+  )
+  add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/scripts ${CMAKE_SOURCE_DIR}/out/scripts
+    COMMAND ${CMAKE_COMMAND} -E copy_directory $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/assets ${CMAKE_SOURCE_DIR}/out/assets
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME}.html ${CMAKE_SOURCE_DIR}/out/${CMAKE_PROJECT_NAME}.html
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME}.js ${CMAKE_SOURCE_DIR}/out/${CMAKE_PROJECT_NAME}.js
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME}.wasm ${CMAKE_SOURCE_DIR}/out/${CMAKE_PROJECT_NAME}.wasm
+  )
+else ()
+  add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/scripts ${CMAKE_SOURCE_DIR}/out/scripts
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_SOURCE_DIR}/out/assets
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/${CMAKE_PROJECT_NAME} ${CMAKE_SOURCE_DIR}/out/${CMAKE_PROJECT_NAME}
+  )  
 endif ()
 
 # Setting ASSETS_PATH

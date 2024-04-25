@@ -48,6 +48,7 @@ int main(int argc, char* argv[]) {
   InitWindow(screen_width, screen_height, "SLGJ - 2024");
   SetTargetFPS(60);
 
+  printf("foi");
   char filename[] = SCRIPTS_PATH"main.scm";
 
   s7_load(s7, filename);
