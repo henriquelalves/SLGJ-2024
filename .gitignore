@@ -3,9 +3,13 @@
 .vs/
 cmake-build-debug/
 bin/
-build/
+build*/
 out/
 slgj
 _deps/
 CMakeFiles/
 CMakeSettings.json
+
+# clangd stuff
+.cache/
+compile_commands.json
