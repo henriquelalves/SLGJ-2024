@@ -1,0 +1,8 @@
+(define (is-point-inside-rect? point rect)
+  (cond ((not (point? point)) #f)
+	((not (rect? rect)) #f)
+	(else (and (>= (point-x point) (rect-x rect))
+		   (>= (point-y point) (rect-y rect))
+		   (<= (point-x point) (+ (rect-x rect) (rect-width rect)))
+		   (<= (point-y point) (+ (rect-y rect) (rect-height rect))))
+	      )))

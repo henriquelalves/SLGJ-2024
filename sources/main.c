@@ -5,9 +5,11 @@
 
 #include "raylib.h"
 #include "s7.h"
+#include "types.h"
 #include "text.h"
 #include "texture.h"
 #include "core.h"
+#include "shapes.h"
 
 #include <math.h>
 #include <stdio.h> 
@@ -41,10 +43,12 @@ void main_loop(){
 
 int main(int argc, char* argv[]) {
   s7 = s7_init();
-  
+
+  rl_register_types(s7);
   rl_text_define_methods(s7);
   rl_texture_define_methods(s7);
   rl_core_define_methods(s7);
+  rl_shapes_define_methods(s7);
   
   const int screen_width = 800;
   const int screen_height = 600;
