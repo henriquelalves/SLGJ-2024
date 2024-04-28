@@ -17,7 +17,13 @@ static s7_pointer rl_is_key_down(s7_scheme *s7, s7_pointer args) {
   return(s7_make_boolean(s7, isKey));
 }
 
+static s7_pointer rl_get_char_pressed(s7_scheme *s7, s7_pointer args) {
+  int key = GetCharPressed();
+  return(s7_make_integer(s7, key));
+}
+
 static void rl_core_define_methods(s7_scheme *s7) {
   s7_define_function(s7, "rl-is-key-down", rl_is_key_down, 1, 0, false, "(rl-is-key-down KEY)");
   s7_define_function(s7, "rl-get-mouse-position", rl_get_mouse_position, 0, 0, false, "(rl-get-mouse-position)");
+  s7_define_function(s7, "rl-get-char-pressed", rl_get_char_pressed, 0, 0, false, "(rl-get-char-pressed)");
 }
