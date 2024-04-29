@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "s7.h"
+#include "s7/s7.h"
 #include <stdio.h>
 #include <stdlib.h>
 

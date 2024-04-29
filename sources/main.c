@@ -4,12 +4,12 @@
 #endif
 
 #include "raylib.h"
-#include "s7.h"
-#include "types.h"
-#include "text.h"
-#include "texture.h"
-#include "core.h"
-#include "shapes.h"
+#include "s7/s7.h"
+#include "rl/types.h"
+#include "rl/text.h"
+#include "rl/texture.h"
+#include "rl/core.h"
+#include "rl/shapes.h"
 
 #include <math.h>
 #include <stdio.h> 
