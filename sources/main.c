@@ -21,12 +21,14 @@ s7_pointer s7_draw_fn;
 
 #ifdef __EMSCRIPTEN__
 EM_BOOL main_loop_web(double time, void* userData) {
+
   s7_call(s7, s7_update_fn, s7_list(s7, 0));
-      
+
   BeginDrawing();
   ClearBackground(BLUE);
   s7_call(s7, s7_draw_fn, s7_list(s7, 0));
   EndDrawing();
+  PollInputEvents(); // <- this is necessary because of a web specific bug. See https://github.com/raysan5/raylib/issues/2379
   return EM_TRUE;
 }
 #else
