@@ -16,9 +16,9 @@ typedef double s7_double;
   #include <stdbool.h>
 #else
 #ifndef true
-  #define bool	unsigned char
-  #define true	1
-  #define false	0
+  #define bool        unsigned char
+  #define true        1
+  #define false       0
 #endif
 #endif
 #endif
@@ -504,7 +504,7 @@ s7_pointer s7_make_function(s7_scheme *sc, const char *name, s7_function fnc, s7
 /* safe functions: */
 s7_pointer s7_make_safe_function(s7_scheme *sc, const char *name, s7_function fnc, s7_int required_args, s7_int optional_args, bool rest_arg, const char *doc);
 s7_pointer s7_make_typed_function(s7_scheme *sc, const char *name, s7_function f,
-				  s7_int required_args, s7_int optional_args, bool rest_arg, const char *doc, s7_pointer signature);
+                                  s7_int required_args, s7_int optional_args, bool rest_arg, const char *doc, s7_pointer signature);
 
 /* arglist or body possibly unsafe: */
 s7_pointer s7_define_function(s7_scheme *sc, const char *name, s7_function fnc, s7_int required_args, s7_int optional_args, bool rest_arg, const char *doc);
@@ -512,18 +512,18 @@ s7_pointer s7_define_function(s7_scheme *sc, const char *name, s7_function fnc, 
 /* arglist and body safe: */
 s7_pointer s7_define_safe_function(s7_scheme *sc, const char *name, s7_function fnc, s7_int required_args, s7_int optional_args, bool rest_arg, const char *doc);
 s7_pointer s7_define_typed_function(s7_scheme *sc, const char *name, s7_function fnc,
-				    s7_int required_args, s7_int optional_args, bool rest_arg,
-				    const char *doc, s7_pointer signature);
+                                    s7_int required_args, s7_int optional_args, bool rest_arg,
+                                    const char *doc, s7_pointer signature);
 
 /* arglist unsafe or body unsafe: */
 s7_pointer s7_define_unsafe_typed_function(s7_scheme *sc, const char *name, s7_function fnc,
-					   s7_int required_args, s7_int optional_args, bool rest_arg,
-					   const char *doc, s7_pointer signature);
+                                           s7_int required_args, s7_int optional_args, bool rest_arg,
+                                           const char *doc, s7_pointer signature);
 
 /* arglist safe, body possibly unsafe: */
 s7_pointer s7_define_semisafe_typed_function(s7_scheme *sc, const char *name, s7_function fnc,
-					     s7_int required_args, s7_int optional_args, bool rest_arg,
-					     const char *doc, s7_pointer signature);
+                                             s7_int required_args, s7_int optional_args, bool rest_arg,
+                                             const char *doc, s7_pointer signature);
 
 s7_pointer s7_make_function_star(s7_scheme *sc, const char *name, s7_function fnc, const char *arglist, const char *doc);
 s7_pointer s7_make_safe_function_star(s7_scheme *sc, const char *name, s7_function fnc, const char *arglist, const char *doc);
@@ -611,27 +611,27 @@ s7_pointer s7_call_with_catch(s7_scheme *sc, s7_pointer tag, s7_pointer body, s7
 
 bool s7_is_dilambda(s7_pointer obj);
 s7_pointer s7_dilambda(s7_scheme *sc,
-		       const char *name,
-		       s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
-		       s7_int get_req_args, s7_int get_opt_args,
-		       s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
-		       s7_int set_req_args, s7_int set_opt_args,
-		       const char *documentation);
+                       const char *name,
+                       s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
+                       s7_int get_req_args, s7_int get_opt_args,
+                       s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
+                       s7_int set_req_args, s7_int set_opt_args,
+                       const char *documentation);
 s7_pointer s7_typed_dilambda(s7_scheme *sc,
-		       const char *name,
-		       s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
-		       s7_int get_req_args, s7_int get_opt_args,
-		       s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
-		       s7_int set_req_args, s7_int set_opt_args,
-		       const char *documentation,
- 		       s7_pointer get_sig, s7_pointer set_sig);
+                             const char *name,
+                             s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
+                             s7_int get_req_args, s7_int get_opt_args,
+                             s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
+                             s7_int set_req_args, s7_int set_opt_args,
+                             const char *documentation,
+                             s7_pointer get_sig, s7_pointer set_sig);
 s7_pointer s7_dilambda_with_environment(s7_scheme *sc, s7_pointer envir,
-					const char *name,
-					s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
-					s7_int get_req_args, s7_int get_opt_args,
-					s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
-					s7_int set_req_args, s7_int set_opt_args,
-					const char *documentation);
+                                        const char *name,
+                                        s7_pointer (*getter)(s7_scheme *sc, s7_pointer args),
+                                        s7_int get_req_args, s7_int get_opt_args,
+                                        s7_pointer (*setter)(s7_scheme *sc, s7_pointer args),
+                                        s7_int set_req_args, s7_int set_opt_args,
+                                        const char *documentation);
 
 s7_pointer s7_values(s7_scheme *sc, s7_pointer args);          /* (values ...) */
 bool s7_is_multiple_value(s7_pointer obj);                     /*    is obj the results of (values ...) */
