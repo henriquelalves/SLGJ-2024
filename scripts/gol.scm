@@ -4,8 +4,10 @@
   '((-1 . -1) (0 . -1) (1 . -1) (-1 . 0) (1 . 0) (-1 . 1) (0 . 1) (1 . 1)))
 
 (set! (current-cells '(1 . 1)) #t)
-(set! (current-cells '(1 . 2)) #t)
-(set! (current-cells '(1 . 3)) #t)
+(set! (current-cells '(2 . 1)) #t)
+(set! (current-cells '(3 . 1)) #t)
+(set! (current-cells '(3 . 0)) #t)
+(set! (current-cells '(2 . -1)) #t)
 
 (define sum-cells
   (lambda (c1 c2)

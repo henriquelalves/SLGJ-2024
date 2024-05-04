@@ -10,6 +10,7 @@
 #include "rl/texture.h"
 #include "rl/core.h"
 #include "rl/shapes.h"
+#include "repl/repl.h"
 
 #include <math.h>
 #include <stdio.h> 

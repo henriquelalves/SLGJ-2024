@@ -6,10 +6,10 @@
 static s7_pointer rl_draw_rectangle(s7_scheme *s7, s7_pointer args) {
   Color *c = (Color *)s7_c_object_value(s7_car(s7_cdr(s7_cdr(s7_cdr(s7_cdr(args))))));
   
-  DrawRectangle(s7_integer(s7_car(args)),
-		s7_integer(s7_car(s7_cdr(args))),
-		s7_integer(s7_car(s7_cdr(s7_cdr(args)))),
-		s7_integer(s7_car(s7_cdr(s7_cdr(s7_cdr(args))))),
+  DrawRectangle(s7_real(s7_car(args)),
+		s7_real(s7_car(s7_cdr(args))),
+		s7_real(s7_car(s7_cdr(s7_cdr(args)))),
+		s7_real(s7_car(s7_cdr(s7_cdr(s7_cdr(args))))),
 		*c);
 
   return(NULL);
