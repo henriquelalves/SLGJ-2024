@@ -9,6 +9,7 @@
 #include "rl/text.h"
 #include "rl/texture.h"
 #include "rl/core.h"
+#include "rl/enums.h"
 #include "rl/shapes.h"
 #include "repl/repl.h"
 
@@ -48,6 +49,7 @@ int main(int argc, char* argv[]) {
   s7 = s7_init();
 
   rl_register_types(s7);
+  rl_register_enums(s7);
   rl_text_define_methods(s7);
   rl_texture_define_methods(s7);
   rl_core_define_methods(s7);

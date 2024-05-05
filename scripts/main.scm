@@ -1,4 +1,3 @@
-(load "./scripts/keys.scm")
 (load "./scripts/structs.scm")
 (load "./scripts/utils.scm")
 (load "./scripts/prompt.scm")
