@@ -1,7 +1,0 @@
-(define KEY_ENTER 257)
-(define KEY_BACKSPACE 259)
-(define KEY_SPACE 32)
-(define KEY_RIGHT 262)
-(define KEY_LEFT 263)
-(define KEY_DOWN 264)
-(define KEY_UP 265)
