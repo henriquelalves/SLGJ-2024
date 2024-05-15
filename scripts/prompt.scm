@@ -6,7 +6,7 @@
   (let ((key-pressed (rl-get-key-pressed)))
     
     
-    (if (or (eq? key-pressed 161) (eq? key-pressed 96))
+    (if (eq? key-pressed KEY_F1)
 	(set! prompt-active (not prompt-active))
 	)
     

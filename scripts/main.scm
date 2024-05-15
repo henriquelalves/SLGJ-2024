@@ -4,29 +4,37 @@
 (load "./scripts/gol.scm")
 
 (define camera-offset (make-point))
+(define space-pressed #f)
 
 (define (update)
-  ;;  (prompt-update) ;; it's eating the input!
-  (if (rl-is-key-down KEY_DOWN)
-      (set! (point-y camera-offset) (+ (point-y camera-offset) 2))
-      )
-  
-  (if (rl-is-key-down KEY_UP)
-      (set! (point-y camera-offset) (+ (point-y camera-offset) -2))
-      )
+  (prompt-update)
 
-  (if (rl-is-key-down KEY_LEFT)
-      (set! (point-x camera-offset) (+ (point-x camera-offset) -2))
-      )
-  
-  (if (rl-is-key-down KEY_RIGHT)
-      (set! (point-x camera-offset) (+ (point-x camera-offset) 2))
-      )
+  (cond ((not prompt-active)
+	 (if (rl-is-key-down KEY_DOWN)
+	     (set! (point-y camera-offset) (+ (point-y camera-offset) 2))
+	     )
+	 
+	 (if (rl-is-key-down KEY_UP)
+	     (set! (point-y camera-offset) (+ (point-y camera-offset) -2))
+	     )
 
-  (if (eq? (rl-get-key-pressed) KEY_SPACE)
-      (run-step)
-      )
-  
+	 (if (rl-is-key-down KEY_LEFT)
+	     (set! (point-x camera-offset) (+ (point-x camera-offset) -2))
+	     )
+	 
+	 (if (rl-is-key-down KEY_RIGHT)
+	     (set! (point-x camera-offset) (+ (point-x camera-offset) 2))
+	     )
+	 
+	 (cond ((and (rl-is-key-down KEY_SPACE) (not space-pressed))
+		(set! space-pressed #t)
+		(run-step))
+	       )
+	 
+	 (if (not (rl-is-key-down KEY_SPACE))
+	     (set! space-pressed #f)
+	     )
+	 ))
   )
 
 (define (draw)
