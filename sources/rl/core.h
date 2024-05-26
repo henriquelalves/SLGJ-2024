@@ -11,10 +11,20 @@ static s7_pointer rl_get_mouse_position(s7_scheme *s7, s7_pointer args) {
   return vec;
 }
 
+static s7_pointer rl_is_mouse_button_pressed(s7_scheme *s7, s7_pointer args) {
+  bool isPressed = IsMouseButtonPressed(0);
+  return(s7_make_boolean(s7, isPressed));
+}
+
 static s7_pointer rl_is_key_down(s7_scheme *s7, s7_pointer args) {
   int key = s7_integer(s7_car(args));
   bool isKey = IsKeyDown(key);
   return(s7_make_boolean(s7, isKey));
+}
+
+static s7_pointer rl_get_frame_time(s7_scheme *s7, s7_pointer args) {
+  float dt = GetFrameTime();
+  return(s7_make_real(s7, dt));
 }
 
 static s7_pointer rl_get_char_pressed(s7_scheme *s7, s7_pointer args) {
@@ -32,4 +42,6 @@ static void rl_core_define_methods(s7_scheme *s7) {
   s7_define_function(s7, "rl-get-mouse-position", rl_get_mouse_position, 0, 0, false, "(rl-get-mouse-position)");
   s7_define_function(s7, "rl-get-char-pressed", rl_get_char_pressed, 0, 0, false, "(rl-get-char-pressed)");
   s7_define_function(s7, "rl-get-key-pressed", rl_get_key_pressed, 0, 0, false, "(rl-get-key-pressed)");
+  s7_define_function(s7, "rl-get-frame-time", rl_get_frame_time, 0, 0, false, "(rl-get-frame-time)");
+  s7_define_function(s7, "rl-is-mouse-button-pressed", rl_is_mouse_button_pressed, 0, 0, false, "(rl_is_mouse_button_pressed)");
 }

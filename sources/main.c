@@ -54,8 +54,8 @@ int main(int argc, char* argv[]) {
   rl_core_define_methods(s7);
   rl_shapes_define_methods(s7);
   
-  const int screen_width = 800;
-  const int screen_height = 600;
+  const int screen_width = 600;
+  const int screen_height = 450;
 
   InitWindow(screen_width, screen_height, "SLGJ - 2024");
   SetTargetFPS(60);

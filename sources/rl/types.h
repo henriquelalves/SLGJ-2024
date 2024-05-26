@@ -21,7 +21,7 @@ static s7_pointer make_color(s7_scheme *sc, s7_pointer args)
   c->r = s7_integer(s7_car(args));
   c->g = s7_integer(s7_cadr(args));
   c->b = s7_integer(s7_caddr(args));
-  c->a = 255;
+  c->a = s7_integer(s7_cadddr(args));
   
   return(s7_make_c_object(sc, color_type_tag, (void *)c));
 }
@@ -92,7 +92,7 @@ static void rl_register_types(s7_scheme *s7) {
   s7_c_type_set_gc_free(s7, color_type_tag, free_color);
   s7_c_type_set_to_string(s7, color_type_tag, color_to_string);
   
-  s7_define_function(s7, "make-color", make_color, 3, 0, false, "(make-color r g b) makes a new color");
+  s7_define_function(s7, "make-color", make_color, 4, 0, false, "(make-color r g b a) makes a new color");
   
   s7_define_function(s7, "color?", is_color, 1, 0, false, "(color? anything) returns #t if its argument is a color object");
 

@@ -3,12 +3,6 @@
 (define neighbors
   '((-1 . -1) (0 . -1) (1 . -1) (-1 . 0) (1 . 0) (-1 . 1) (0 . 1) (1 . 1)))
 
-(set! (current-cells '(1 . 1)) #t)
-(set! (current-cells '(2 . 1)) #t)
-(set! (current-cells '(3 . 1)) #t)
-(set! (current-cells '(3 . 0)) #t)
-(set! (current-cells '(2 . -1)) #t)
-
 (define sum-cells
   (lambda (c1 c2)
     (cons (+ (car c1) (car c2)) (+ (cdr c1) (cdr c2)))))
@@ -37,8 +31,10 @@
 (define list-neighbors
   (lambda (c)
     (map (lambda (n)
-           (sum-cells c n))
-         neighbors)))
+	   (sum-cells c n)
+	   )
+	 neighbors)
+    ))
 
 (define sum-live-cells
   (lambda (lat n)
@@ -75,4 +71,27 @@
       (set! current-cells  next-cells)
       )
     )
+  )
+
+(define (clear-cells)
+  (set! current-cells (make-hash-table))
+  )
+
+(define (toggle-cell c)
+  (if (current-cells c)
+      (set! (current-cells c) #f)
+      (set! (current-cells c) #t)
+      )
+  )
+
+(define (set-cells-array arr)
+  (map (lambda (c)
+	 (set! (current-cells c) #t)
+	 )
+       arr
+       )
+  )
+
+(define (get-cells-list)
+  (hash-table-keys current-cells)
   )

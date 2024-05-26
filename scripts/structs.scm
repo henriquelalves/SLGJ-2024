@@ -77,3 +77,4 @@
 
 (defstruct rect (x 0.0) (y 0.0) (width 0.0) (height 0.0))
 (defstruct point (x 0.0) (y 0.0))
+(defstruct stage (width 0) (height 0) (generations 0) (final-state #f))
